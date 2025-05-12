@@ -45,7 +45,7 @@ const ordersController = {
       await OrderDetail.bulkCreate(orderDetails);
 
       const orderWithDetails = await Order.findByPk(order.id, {
-        include: [{ model: OrderDetail, as: 'details' }],
+        include: [{ model: OrderDetail }],
       });
       res.status(201).json(orderWithDetails);
     } catch (error) {
