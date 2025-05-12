@@ -8,7 +8,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --watch ./index.js",
     "start": "node index.js",
-    "build": "npm install"   
+    "build": "npm install && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "sequelize": "sequelize",
+    "migrate": "sequelize-cli db:migrate",
+    "migrate:undo": "sequelize-cli db:migrate:undo",
+    "migrate:undo:all": "sequelize-cli db:migrate:undo:all",
+    "seed": "sequelize-cli db:seed:all",
+    "seed:undo:all": "sequelize-cli db:seed:undo:all",
+    "model:generate": "sequelize-cli model:generate",
+    "migration:generate": "sequelize-cli migration:generate",
+    "seed:generate": "sequelize-cli seed:generate"
   },
   "keywords": [],
   "author": "",
