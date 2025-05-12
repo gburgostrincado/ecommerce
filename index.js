@@ -3,6 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import db from './models/index.js';
 import routes from './routes/index.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
