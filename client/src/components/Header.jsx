@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router';
 import useCartStore from '../features/carts/cartStore';
 
-const Menu = () => {
+const Header = () => {
   const getCartCount = useCartStore((state) => state.getCartCount());
   const menuItems = [
     { label: 'Home', path: '/' },
@@ -58,4 +58,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default Header;
