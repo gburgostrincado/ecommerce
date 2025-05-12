@@ -20,9 +20,9 @@ const config = {
     logging: false
   },
   production: {
-    username: "root",
-    password: null,
-    database: "database_production",
+    username: DB_USER || "root",
+    password: DB_PASSWORD || null,
+    database: DB_NAME || "database_production",
     host: DB_HOST,
     dialect: "postgres"
   }
