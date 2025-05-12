@@ -6,7 +6,7 @@ import ProductDetailPage from './features/products/ProductDetailPage'
 import CheckoutPage from './features/checkout/CheckoutPage'
 import SuccessPage from './features/checkout/SuccessPage'
 import CancelPage from './features/checkout/CancelPage'
-import OrdersPage from './features/oders/OrdersPage'
+import OrdersPage from './features/orders/OrdersPage'
 
 function App() {
   return (

@@ -1,22 +1,7 @@
 import axios from 'axios';
 import { create } from 'zustand';
 
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  imageUrl: string;
-  price: number;
-}
-
-interface ProductStore {
-  products: Product[];
-  loading: boolean;
-  error: string | null;
-  fetchProducts: () => Promise<void>;
-}
-
-const useProductStore = create<ProductStore>((set, get) => ({
+const useProductStore = create((set, get) => ({
   products: [],
   loading: false,
   error: null,

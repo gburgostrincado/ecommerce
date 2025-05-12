@@ -7,7 +7,6 @@ import { NavLink } from "react-router";
 const ProductPage = () => {
   const products = useProductStore(state => state.products);
   const fetchProducts = useProductStore(state => state.fetchProducts);
-  const loading = useProductStore(state => state.loading);
 
   useEffect(() => {
     fetchProducts();
