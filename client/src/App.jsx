@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
 import ProductPage from './features/products/ProductsPage'
 import CartPage from './features/carts/CartPage'
-import Menu from './components/Menu'
+import Header from './components/Header'
 import ProductDetailPage from './features/products/ProductDetailPage'
 import CheckoutPage from './features/checkout/CheckoutPage'
 import SuccessPage from './features/checkout/SuccessPage'
@@ -11,7 +11,7 @@ import OrdersPage from './features/orders/OrdersPage'
 function App() {
   return (
     <BrowserRouter>
-    <Menu /> 
+    <Header /> 
     <Routes>
       <Route path="/" element={<ProductPage />} />
       <Route path="/cart" element={<CartPage />} />
