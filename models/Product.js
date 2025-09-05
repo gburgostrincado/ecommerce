@@ -23,7 +23,21 @@ export default (sequelize, DataTypes) => {
     },
     imageUrl: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      get() {
+        const rawValue = this.getDataValue('imageUrl');
+        return rawValue && rawValue.trim() !== ''
+          ? rawValue
+          : 'https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg';
+      },
+      set(value) {
+        // Si es un string vacío o undefined/null, guardamos null en DB
+        if (!value || value.trim() === '') {
+          this.setDataValue('imageUrl', null);
+        } else {
+          this.setDataValue('imageUrl', value);
+        }
+      }
     }
   }, {
     tableName: 'products',
