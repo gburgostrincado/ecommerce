@@ -34,19 +34,51 @@ const ordersController = {
       return res.status(400).json({ message: 'Cart is empty' });
     }
 
+    const transaction = await db.sequelize.transaction();
+
     try {
-      const order = await Order.create({ totalAmount, name, email, status: 'completed' });
-      const orderDetails = cart.map((product) => ({
-        orderId: order.id,
-        productId: product.id,
-        quantity: product.quantity,
-        price: product.price,
-      }));
-      await OrderDetail.bulkCreate(orderDetails);
+      // 1. Crear la orden
+      const order = await Order.create({ totalAmount, name, email, status: 'completed' }, { transaction });
+      
+      // 2. Procesar productos del carrito
+      const orderDetails = [];
+      for (const product of cart) {
+        const productFound = await Product.findByPk(product.id, { transaction });
+
+        if (!productFound) {
+          throw new Error(`Producto con ID ${product.id} no encontrado`);
+        }
+
+        // verificar stock
+        if (productFound.stock < product.quantity) {
+          throw new Error(`Stock insuficiente para el producto ${productFound.name}`);
+        }
+
+        // Descontar stock
+        await productFound.update(
+          { stock: productFound.stock - product.quantity },
+          { transaction }
+        );
+
+        // Agregar a detalles de la orden
+        orderDetails.push({
+          orderId: order.id,
+          productId: productFound.id,
+          quantity: product.quantity,
+          price: product.price,
+        });
+      }
+
+      // 3. Crear detalles de la orden
+      await OrderDetail.bulkCreate(orderDetails, { transaction });
+
+      // 4. Confirmar transacción
+      await transaction.commit();
 
       const orderWithDetails = await Order.findByPk(order.id, {
         include: [{ model: OrderDetail }],
       });
+
       res.status(201).json(orderWithDetails);
     } catch (error) {
       console.error(error);
