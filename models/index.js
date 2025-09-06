@@ -16,7 +16,13 @@ let sequelize;
 if (dbConfig.databaseUrl) {
   sequelize = new Sequelize(dbConfig.databaseUrl, {
     dialect: 'postgres',
-    logging: false
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false, // muy importante para Neon/Render
+      },
+    },
   });
 } else {
   sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, dbConfig);
