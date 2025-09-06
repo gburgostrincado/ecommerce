@@ -1,4 +1,5 @@
 import fs from 'fs';
+import pg from 'pg';
 import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { Sequelize, DataTypes } from 'sequelize';
@@ -19,7 +20,7 @@ let sequelize;
 if (dbConfig.use_env_variable) {
   sequelize = new Sequelize(process.env[dbConfig.use_env_variable], {
     dialect: 'postgres',
-    dialectModule: require('pg'),
+    dialectModule: pg,
     logging: false,
     dialectOptions: {
       ssl: {
