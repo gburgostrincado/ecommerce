@@ -16,8 +16,8 @@ const db = {};
 let sequelize;
 
 
-if (dbConfig.databaseUrl) {
-  sequelize = new Sequelize(dbConfig.databaseUrl, {
+if (dbConfig.use_env_variable) {
+  sequelize = new Sequelize(process.env[dbConfig.use_env_variable], {
     dialect: 'postgres',
     logging: false,
     dialectOptions: {
