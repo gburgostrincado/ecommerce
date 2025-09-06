@@ -19,6 +19,7 @@ let sequelize;
 if (dbConfig.use_env_variable) {
   sequelize = new Sequelize(process.env[dbConfig.use_env_variable], {
     dialect: 'postgres',
+    dialectModule: require('pg'),
     logging: false,
     dialectOptions: {
       ssl: {
