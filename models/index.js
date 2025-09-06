@@ -4,6 +4,8 @@ import { fileURLToPath, pathToFileURL } from 'url';
 import { Sequelize, DataTypes } from 'sequelize';
 import config from '../config/config.js';
 
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("DATABASE_URL:", process.env.DATABASE_URL ? "✅ definida" : "❌ no definida");
 const dbConfig = config[process.env.NODE_ENV || 'development']
 
 const __filename = fileURLToPath(import.meta.url);
@@ -13,8 +15,6 @@ const basename = path.basename(__filename);
 const db = {};
 let sequelize;
 
-console.log("NODE_ENV:", process.env.NODE_ENV);
-console.log("DATABASE_URL:", process.env.DATABASE_URL ? "✅ definida" : "❌ no definida");
 
 if (dbConfig.databaseUrl) {
   sequelize = new Sequelize(dbConfig.databaseUrl, {
