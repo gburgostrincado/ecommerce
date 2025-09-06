@@ -20,11 +20,12 @@ const config = {
     logging: false
   },
   production: {
-    username: DB_USER || "root",
-    password: DB_PASSWORD || null,
-    database: DB_NAME || "database_production",
-    host: DB_HOST,
-    dialect: "postgres"
+    databaseUrl: process.env.DATABASE_URL,
+    // username: DB_USER || "root",
+    // password: DB_PASSWORD || null,
+    // database: DB_NAME || "database_production",
+    // host: DB_HOST,
+    // dialect: "postgres"
   }
 }
 
