@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --watch ./index.js",
     "start": "node index.js",
-    "build": "echo 'Skipping migrations on Vercel build'",
+    "build": "npm install && npx sequelize-cli db:migrate",
     "sequelize": "sequelize",
     "migrate": "sequelize-cli db:migrate",
     "migrate:undo": "sequelize-cli db:migrate:undo",
@@ -29,14 +29,14 @@
     "pg": "^8.15.6",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.7",
-    "stripe": "^18.1.0"
+    "stripe": "^18.1.0",
+    "sequelize-cli": "^6.6.3"
   },
   "devDependencies": {
     "eslint": "^9.26.0",
     "eslint-config-prettier": "^10.1.3",
     "eslint-plugin-prettier": "^5.4.0",
     "nodemon": "^3.1.10",
-    "prettier": "^3.5.3",
-    "sequelize-cli": "^6.6.3"
+    "prettier": "^3.5.3"
   }
 }
